@@ -21,22 +21,13 @@ public class FileProvider7 {
     public static Uri getUriForFile(Context context, File file) {
         Uri fileUri = null;
         if (Build.VERSION.SDK_INT >= 24) {
-            fileUri = getUriForFile24(context, file);
+            // 注意: 如果获取的文件是属于data/app/~~xxxxxx/com.xx.xx/base.apk这类的文件, 一般都会失败
+            fileUri = FileProvider.getUriForFile(context, context.getPackageName() + ".android7.fileprovider", file);
         } else {
             fileUri = Uri.fromFile(file);
         }
         return fileUri;
     }
-
-
-
-    private static Uri getUriForFile24(Context context, File file) {
-        Uri fileUri = FileProvider.getUriForFile(context,
-                context.getPackageName() + ".android7.fileprovider",
-                file);
-        return fileUri;
-    }
-
 
     public static void setIntentDataAndType(Context context,
                                             Intent intent,
