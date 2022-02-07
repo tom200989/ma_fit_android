@@ -18,6 +18,10 @@ import androidx.core.content.FileProvider;
 
 public class FileProvider7 {
 
+    /**
+     * 获取文件真实路径
+     * (如果获取的文件是属于data/app/~~xxxxxx/com.xx.xx/base.apk这类的文件, 一般都会失败)
+     */
     public static Uri getUriForFile(Context context, File file) {
         Uri fileUri = null;
         if (Build.VERSION.SDK_INT >= 24) {
@@ -29,6 +33,12 @@ public class FileProvider7 {
         return fileUri;
     }
 
+    /**
+     * 安装包等
+     * Intent intent = new Intent(Intent.ACTION_VIEW);
+     * FileProvider7.setIntentDataAndType(this, intent, "application/vnd.android.package-archive", new_apk, true);
+     * startActivity(intent);
+     */
     public static void setIntentDataAndType(Context context,
                                             Intent intent,
                                             String type,
